@@ -92,6 +92,10 @@ namespace LVSController
                     {
                         Console.WriteLine("FailOpen");
                     }
+                    catch (System.IO.IOException)
+                    {
+                        DelPort();
+                    }
                 }
                 if (_serialPort.IsOpen == true)
                 {
@@ -235,7 +239,12 @@ namespace LVSController
             {
                 Console.WriteLine("Null");
             }
-
+        }
+        private void DelPort()
+        {
+            Comlist.Items.Remove(ComBox.Text);
+            ComBox.Clear();
+            ComStatus.Text = "Not Connect";
         }
         //조명 채널 설정
         private void CH1Bar_ValueChanged(object sender, EventArgs e)
